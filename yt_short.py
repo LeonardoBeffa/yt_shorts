@@ -3,19 +3,113 @@ import subprocess
 import numpy as np
 import math
 import logging
+import time
+from moviepy.editor import VideoFileClip
 
+def enhance_video_quality(input_path, output_path):
+    """
+    Melhora a qualidade do vídeo aplicando pós-processamento.
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    Parâmetros:
+    - input_path: Caminho para o vídeo de entrada.
+    - output_path: Caminho onde o vídeo processado será salvo.
+    """
+    command = (
+        fr'ffmpeg -i {input_path} -vf '
+        fr'eq=contrast=1.5:brightness=0.05:saturation=1.2,unsharp=5:5:1.0:5:5:0.0 '
+        fr'-c:a copy {output_path}'
+    )
+    
+    subprocess.call(command, shell=True)
+    logging.info(f'Vídeo processado e melhorado salvo em: {output_path}')
+    return output_path
 
-#Segment Video function
+def remove_black_borders(video_path, output_path):
+    # Carregar o vídeo original
+    video = VideoFileClip(video_path)
+    
+    # Dimensões do vídeo original
+    original_width, original_height = video.size
+
+    # Calcular a área sem bordas
+    # Esses valores precisam ser ajustados para o seu caso específico
+    left = 0  # Ajuste conforme necessário
+    top = original_height // 2.8  # Ajuste conforme necessário
+    right = original_width  # Ajuste conforme necessário
+    bottom = original_height * 2.5 // 4  # Ajuste conforme necessário, diminuir
+    
+    # Cortar o vídeo
+    cropped_video = video.crop(x1=left, y1=top, x2=right, y2=bottom)
+    
+    # Salvar o vídeo modificado
+    cropped_video.write_videofile(output_path, codec="libx264", fps=video.fps)
+    return output_path
+
 def segment_video(response, video_id):
+    output_files = []
     for i, segment in enumerate(response):
         start_time = math.floor(float(segment.get("start_time", 0)))
         end_time = math.ceil(float(segment.get("end_time", 0))) + 2
-        output_file = fr"AI-Shorts-Creator-main/output/{video_id}_output{str(i).zfill(3)}.mp4"
-        command = fr"ffmpeg -i C:\Users\Beffa\Documents\Python\AI-Shorts-Creator-main\input\{video_id}_input_video.mp4 -ss {start_time} -to {end_time} -c copy {output_file}"
+        output_file = fr"AIShortsCreator/output/{video_id}_output{str(i).zfill(3)}.mp4"
+        input_file = fr"C:\Users\Beffa\Documents\Python\AIShortsCreator\input\{video_id}_input_video.mp4"
+        
+        # Comando ffmpeg ajustado para aspecto 9:16
+        command = (
+            fr'ffmpeg -i {input_file} -ss {start_time} -to {end_time} -vf '
+            fr'scale=w=1080:h=-1:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2 '
+            fr'-c:a copy {output_file}'
+        )
+
         subprocess.call(command, shell=True)
-        logging.info('Segmento video.')
+        logging.info(f'Segmento video {i} gerado: {output_file}')
+        output_files.append(output_file)
+    return output_files
+
+def segment_video_full(response, video_id):
+    output_files = []
+    for i, segment in enumerate(response):
+        start_time = math.floor(float(segment.get("start_time", 0)))
+        end_time = math.ceil(float(segment.get("end_time", 0))) + 2
+        output_file = fr"AIShortsCreator/output/{video_id}_full_output{str(i).zfill(3)}.mp4"
+        input_file = fr"C:\Users\Beffa\Documents\Python\AIShortsCreator\input\{video_id}_input_video.mp4"
+        
+        # Comando ffmpeg ajustado para preencher a tela toda mantendo a proporção 9:16
+        command = (
+            fr'ffmpeg -i {input_file} -ss {start_time} -to {end_time} -vf '
+            fr'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920 '
+            fr'-an -c:v libx264 {output_file}'
+        )
+
+        subprocess.call(command, shell=True)
+        logging.info(f'Segmento de vídeo {i} gerado: {output_file}')
+        output_files.append(output_file)
+    return output_files
+
+def overlay_videos_with_blur(response, video_id):
+    segmented_videos = segment_video(response, video_id)
+    full_segmented_videos = segment_video_full(response, video_id)
+    
+    for i, (segmented, full_segmented) in enumerate(zip(segmented_videos, full_segmented_videos)):
+        output_path = fr"AIShortsCreator/output/{video_id}_final_output{str(i).zfill(3)}.mp4"
+
+        # Remove black borders from segmented video
+        time.sleep(2)
+        no_border_segmented_path = remove_black_borders(segmented, fr"AIShortsCreator/output/{video_id}_no_border_output{str(i).zfill(3)}.mp4")
+
+        command = (
+            fr'ffmpeg -i {no_border_segmented_path} -i {full_segmented} -filter_complex '
+            fr'"[1:v]boxblur=luma_radius=60:luma_power=1[blurred];'
+            fr'[blurred][0:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" '
+            fr'-c:a copy {output_path}'
+        )
+
+        subprocess.call(command, shell=True)
+        logging.info(f'Vídeo gerado com sobreposição e desfoque: {output_path}')
+        
+        enhanced_output_path = fr"AIShortsCreator/finalcut/{video_id}_enhanced_output{str(i).zfill(3)}.mp4"
+        enhance_video_quality(output_path, enhanced_output_path)
+
+
 
 def detect_faces(video_file):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -38,7 +132,7 @@ def crop_video(faces, input_file, output_file):
     try:
         if len(faces) > 0:
             CROP_RATIO = 0.9  
-            VERTICAL_RATIO = 9 / 16  
+            VERTICAL_RATIO = 9/16  
 
             cap = cv2.VideoCapture(input_file)
             frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))

@@ -2,11 +2,7 @@ from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip
 import logging
 import os
 
-#Para o arquivo yt_pngs funcionar é necessario criar uma pasta PNGS
-#E adicionar os arquivos relevantas.
-#Edit o path com o caminho até a pasta.
-
-path = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator'
+path = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\pngs'
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 os.system('cls')
@@ -38,7 +34,7 @@ def add_png_in_clip(video_path, output_path, png_path,position,opacity,png_scale
     logging.info(f'Finalizando PNG em {video_path}')
 
 def add_watermark(input_path, output_path):
-    png_path_watermark = fr"{path}\pngs\watermark.png"
+    png_path_watermark = fr"{path}\watermark.png"
     position = ("right", "bottom") 
     opacity = 0.6  
     png_scale = 0.5
@@ -46,7 +42,7 @@ def add_watermark(input_path, output_path):
     add_png_in_clip(input_path, output_path, png_path_watermark, position, opacity, png_scale)
 
 def add_text(input_path, output_path):
-    png_path_text = fr"{path}\pngs\inscr.png"
+    png_path_text = fr"{path}\inscr.png"
     position = ("center", "bottom") 
     opacity = 0.9  
     png_scale = 2

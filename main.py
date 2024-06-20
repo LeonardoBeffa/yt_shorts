@@ -1,33 +1,10 @@
 from yt_video_transcript import get_transcript, download_video
-from yt_short import overlay_videos_with_blur, remove_black_borders#segment_video_full, detect_faces, crop_video
+from yt_short import overlay_videos_with_blur
 import os
 import logging
-import random
-import string
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 os.system('cls')
-
-def make_unique_filenames(folder_path):
-    # Lista os itens na pasta
-    items = os.listdir(folder_path)
-    
-    # Processa cada item na pasta
-    for item in items:
-        # Verifica se é um arquivo
-        if os.path.isfile(os.path.join(folder_path, item)):
-            # Separa o nome do arquivo e a extensão
-            filename, extension = os.path.splitext(item)
-            
-            # Gera um valor aleatório para adicionar ao nome do arquivo
-            random_suffix = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
-            
-            # Constrói o novo nome de arquivo único
-            new_filename = f'{filename}_{random_suffix}{extension}'
-            
-            # Renomeia o arquivo com o novo nome
-            os.rename(os.path.join(folder_path, item), os.path.join(folder_path, new_filename))
-            logging.info(f'Renamed: {item} -> {new_filename}')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 def deletar_arquivos(pasta):
     for filename in os.listdir(pasta):
@@ -71,33 +48,28 @@ def prompt_generator(transcript):
         print()
     logging.info('Prompts Gerados.')
 
-video_id='G40p0j4QaZg' #ID do video. Somente alterar aqui
+video_id = 'XU_M2ih3VGw' #ID do video. Somente alterar aqui
 filename = 'input_video.mp4'
 diretorio = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\input\{video_id}_{filename}'
-folder_path = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\output'
-deleted_past = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\output_cropped'
+folder_path = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\finalcut'
+temp_files = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\output'
+json_files = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\json'
 
 logging.info('Iniciando do programa:')
 download_video(diretorio, video_id)
 transcript = get_transcript(video_id)
 
-cond = 1
+cond = 0
 if cond == 0:
     prompt_generator(transcript)
     logging.info('Fim do programa.')
 else:
     #Alterar aqui para pegar os cortes.
-    interesting_segment = {"content": [{"start_time": 46.76,"end_time": 91.24,"description": "Introduction and humorous banter about the participants' professions, with jokes about physical appearance and age."}]}
+    interesting_segment = {"content": [{"start_time": 243.079,"end_time": 280.16,"description": "Discussion about card cloning, Marcel's explanation of the 1995 card cloning operations, and the camaraderie and humor among the participants."}]}
 
     parsed_content = interesting_segment["content"]
     overlay_videos_with_blur(parsed_content, video_id)
 
-    for i in range(0, len(interesting_segment["content"])):  
-        input_file = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\output\{video_id}_output{str(i).zfill(3)}.mp4'
-        output_file = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator\output_cropped\{video_id}_output_cropped{str(i).zfill(3)}.mp4'
-        #faces = detect_faces(input_file)
-        #crop_video(faces, input_file, output_file)
-
-    #make_unique_filenames(folder_path)
-    #deletar_arquivos(deleted_past)
+    deletar_arquivos(temp_files)
+    deletar_arquivos(json_files)
     logging.info('Fim do programa.')

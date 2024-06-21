@@ -2,8 +2,6 @@
 
 ## Descrição
 Este programa tem como objetivo criar vídeos curtos e virais a partir de vídeos do YouTube. Ele realiza automaticamente o download do vídeo, faz os cortes necessários, ajusta o tamanho e gera partes virais, separando-as em vídeos curtos. Além disso, faz todos os ajustes necessários, incluindo a adição de legendas.
-- Necessario editar essa parte para cada Video.
-* ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/43fd674a-246b-419e-9a01-65cf4c01de86)
 
 ## Resultado
 - Original
@@ -22,6 +20,8 @@ Este programa tem como objetivo criar vídeos curtos e virais a partir de vídeo
 
 ## Parte Manual
 Atualmente, existe uma pequena parte manual no processo, pois ainda falta a implementação com a IA da OpenAI para tornar o processo totalmente automatizado.
+- Necessario editar essa parte para cada Video.
+* ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/43fd674a-246b-419e-9a01-65cf4c01de86)
 
 ## Uso
 Para utilizar este programa, siga os passos abaixo:
@@ -30,7 +30,7 @@ Para utilizar este programa, siga os passos abaixo:
    - Identifique o ID do vídeo que deseja analisar.
    - Exemplo de um ID de vídeo do YouTube: `dQw4w9WgXcQ`.
    - Insira este ID no campo apropriado do programa.
-
+   - ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/cd3701f2-e177-4885-bfe9-d89629644bbd)
 
 2. **Utilizar os prompts gerados para descobrir as partes virais do vídeo**
    - O programa irá gerar uma série de prompts que ajudarão a identificar as partes mais populares ou virais do vídeo.

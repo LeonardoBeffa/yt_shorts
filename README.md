@@ -22,6 +22,7 @@ Para utilizar este programa, siga os passos abaixo:
    - Identifique o ID do vídeo que deseja analisar.
    - Exemplo de um ID de vídeo do YouTube: `dQw4w9WgXcQ`.
    - Insira este ID no campo apropriado do programa.
+   - ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/4183843e-5e42-46d3-b153-6c03279b42a6)
 
 2. **Utilizar os prompts gerados para descobrir as partes virais do vídeo**
    - O programa irá gerar uma série de prompts que ajudarão a identificar as partes mais populares ou virais do vídeo.

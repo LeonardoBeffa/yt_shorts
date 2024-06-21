@@ -2,12 +2,14 @@
 
 ## Descrição
 Este programa tem como objetivo criar vídeos curtos e virais a partir de vídeos do YouTube. Ele realiza automaticamente o download do vídeo, faz os cortes necessários, ajusta o tamanho e gera partes virais, separando-as em vídeos curtos. Além disso, faz todos os ajustes necessários, incluindo a adição de legendas.
+- Necessario editar essa parte para cada Video.
+* ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/43fd674a-246b-419e-9a01-65cf4c01de86)
 
 ## Resultado
 - Original
-- ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/3cbe301c-4db7-41a0-bdb1-127b43b1a07e)
+* ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/3cbe301c-4db7-41a0-bdb1-127b43b1a07e)
 - Final:
-- ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/946aef12-92cc-4fa1-a321-566a947187fa)
+* ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/946aef12-92cc-4fa1-a321-566a947187fa)
 
 ## Funcionalidades
 

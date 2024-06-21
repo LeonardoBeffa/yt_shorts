@@ -96,7 +96,7 @@ def get_random_color():
     colors = ['yellow']
     return random.choice(colors)
 
-def create_caption(textJSON, framesize, color='white', stroke_color='black', stroke_width=1.5):
+def create_caption(textJSON, framesize, color='white', stroke_color='black', stroke_width=2.1):
     font = fr"{pngs_path}\Helvetica.ttf"
     full_duration = textJSON['end'] - textJSON['start']
     
@@ -144,7 +144,7 @@ def create_caption(textJSON, framesize, color='white', stroke_color='black', str
 
         else:
             x_pos = 0
-            y_pos = y_pos + word_height + 6
+            y_pos = y_pos + word_height + 15
             line_width = word_width + space_width
 
             highlight_color = get_random_color()

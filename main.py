@@ -6,7 +6,7 @@ import logging
 os.system('cls')
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
-video_id = 'G40p0j4QaZg' #ID do video. Somente alterar aqui
+video_id = 't0bdqJrVJdk' #ID do video. Somente alterar aqui
 relative_path = fr'C:\Users\Beffa\Documents\Python\AIShortsCreator' #Altere para a pasta do prejeto.
 
 def deletar_arquivos(pasta):
@@ -45,11 +45,11 @@ def prompt_generator(transcript):
 
     for i in range(1, ((len(dic_temp))+1)):
         print(f'\nPrompt {i}')
-        print('You are a ViralGPT helpful assistant.You are master at reading youtube transcripts and identifying the most Interesting and Viral Content\n')
-        print(f"This is a transcript of a video. Please identify the 3 most viral sections from the whole, make sure they are more than 40 seconds in duration, Make Sure you provide extremely accurate timestamps respond only in this format {template}. Here is the Transcription:\n")
+        print('You are a ViralGPT helpful assistant. You are master at reading youtube transcripts and identifying the most Interesting and Viral Content\n')
+        print(f"This is a transcript of a video. Please identify the 3 most viral sections from the whole, make sure they are more than 40 seconds in duration, Make Sure you provide extremely accurate timestamps respond only in this format {template}. json, Here is the Transcription:\n")
         print(dic_temp[f'content{i}'])
         print()
-    logging.info('Prompts Gerados.')
+    logging.info(f'Prompts Gerados. {i} de 6')
 
 def verifica_ou_cria_pasta(past_path):
     if not os.path.exists(past_path):
@@ -71,16 +71,15 @@ verifica_ou_cria_pasta(fr'{relative_path}\pngs')
 verifica_ou_cria_pasta(temp_files)
 verifica_ou_cria_pasta(json_files)
 
-download_video(input_path, video_id)
-transcript = get_transcript(video_id)
-
-cond = 0
+cond = 1
 if cond == 0:
+    download_video(input_path, video_id)
+    transcript = get_transcript(video_id)
     prompt_generator(transcript)
     logging.info('Fim do programa.')
 else:
-    #Alterar aqui para pegar os cortes.
-    interesting_segment = {"content": [{"start_time": 46.76,"end_time": 91.24,"description": "Introduction and humorous banter about the participants' professions, with jokes about physical appearance and age."},{"start_time": 171.28,"end_time": 218.56,"description": "Discussion about participants' motivations to become police officers, with humorous and serious reflections."},{"start_time": 245.2,"end_time": 289.84,"description": "Continuation of personal stories and humorous exchanges about being police officers, featuring a Spider-Man reference."},{"start_time": 350.639,"end_time": 379.4,"description": "Discussion about the 'relógio de polícia' (police watch) and the stereotypes associated with being a police officer, with humorous banter about physical characteristics and appearance."},{"start_time": 439.36,"end_time": 471.0,"description": "Voting segment where participants discuss and vote on who should be eliminated, with candid comments and a bit of humor about each other's backgrounds and motivations."},{"start_time": 566.44,"end_time": 604.0,"description": "Recreation of a police scenario involving a 'Mike Papa' situation, with humorous confusion and banter about the terminology used."},{"start_time": 706.76,"end_time": 746.199,"description": "Discussion about whether Rodrigo is a police officer, including suspicions about him being armed and having been shot at."},{"start_time": 808.12,"end_time": 848.44,"description": "Simulated police stop with detailed interaction between the officer and the individual being stopped, highlighting procedures and reactions."},{"start_time": 855.32,"end_time": 896.68,"description": "Further exploration of police procedures during a stop, including checking for documents and frisking, with humorous elements."},{'start_time': 1023.199, 'end_time': 1074.44, 'description': 'Interação humorística sobre abordagem policial e comentários engraçados sobre o vídeo.'}, {'start_time': 1111.159, 'end_time': 1158.6, 'description': 'História engraçada sobre interação com a polícia, com humor e reflexões pessoais.'}, {'start_time': 1195.2, 'end_time': 1225.32, 'description': 'Discussão sobre chefes da polícia e situação difícil com troca de tiros, trazendo seriedade e curiosidade.'},{"start_time": 1253.28,"end_time": 1326.84,"description": "Detailed recount of a dangerous shootout and the bravery involved in rescuing a fallen friend."},{"start_time": 1358.72,"end_time": 1432.32,"description": "Humorous segment where participants debate and vote on who is a real police officer, including imitations and funny remarks."},{"start_time": 1452.4,"end_time": 1532.24,"description": "Participants share inspiring stories about impactful moments in their police careers, including rescuing"},{"start_time": 1534.08,"end_time": 1580.44,"description": "Discussion about identifying the real police officer among the participants."},{"start_time": 1608.039,"end_time": 1658.52,"description": "Revealing and discussing the true identity of the real police officer."},{"start_time": 1720.519,"end_time": 1775.76,"description": "Participants reveal their true professions and backgrounds."}]}
+    #Alterar aqui para pegar os cortes. (alt + z)
+    interesting_segment = {'content': [{'start_time': 0.12, 'end_time': 54.28, 'description': 'Introduction to the video and its concept, explaining the rules and the competition with a surprise for the participants.'}, {'start_time': 63.16, 'end_time': 136.84, 'description': 'Round one where participants are ranked based on appearance, with humorous and engaging interactions among the hosts.'}, {'start_time': 170.44, 'end_time': 276.919, 'description': 'Round two, where the hosts ask the participants about their areas of work and favorite restaurants, leading to interesting and funny responses.'},{"start_time": 318.32,"end_time": 379.72,"description": "Discussion about international travels, frequency of trips, and associated costs, featuring some humor and curiosity about destinations."},{"start_time": 471.84,"end_time": 526.88,"description": "Conversation about meeting Mickey at Disney, including personal emotions and reactions, transitioning into questions about household appliances with humorous elements."},{"start_time": 536.68,"end_time": 598.24,"description": "Light-hearted banter about refrigerators, the number of doors they have, and a humorous debate on the truthfulness of these claims, ending with a discussion on hobbies like football and samba."},{'start_time': 600.16, 'end_time': 641.639, 'description': 'Humorous exchange about perceptions and reactions to a montage and interactions among friends.'}, {'start_time': 688.399, 'end_time': 729.079, 'description': 'Discussion about travel expenses, affordable prices, and gratitude for last-minute deals.'}, {'start_time': 740.12, 'end_time': 780.12, 'description': 'Rapid-fire questions about financial status, personal preferences, and social habits.'},{"start_time": 969.04,"end_time": 996.399,"description": "O Léo fala sobre ser o menos abastado financeiramente e a discussão segue sobre o impacto disso no grupo."},{"start_time": 1030.36,"end_time": 1055.24,"description": "Os participantes discutem os itens mais caros que já compraram, incluindo um PC de 4000 e a obra de uma cozinha."},{"start_time": 1087.039,"end_time": 1121.039,"description": "Paloma fala sobre os itens caros que já comprou, como um iPad e um grill de dente de ouro, gerando reações surpreendidas dos outros participantes."},{'start_time': 1263.64, 'end_time': 1302.08, 'description': 'Discussion on the possibility of Gustavo earning more and the challenges of interpreting peoples financial situations.'}, {'start_time': 1343.6, 'end_time': 1394.24, 'description': 'Analysis of the potential cost of travel destinations and the expenses related to personal property improvements.'}, {'start_time': 1398.4, 'end_time': 1425.88, 'description': 'Final debate on the rankings of individuals based on perceived financial status, with a focus on Gustavo and Tulio.'},{"start_time": 1536.279,"end_time": 1572.48,"description": "Excitement and tension build as the group waits for the results of a competition, leading to a moment of celebration and relief."},{"start_time": 1643.279,"end_time": 1672.279,"description": "The group celebrates their victory and everyone is awarded R$3,000 for travel packages, creating a joyful and triumphant atmosphere."},{"start_time": 1692.2,"end_time": 1710.039,"description": "The conversation turns lively with discussions about relationships, ending with a call to action for viewers to like, subscribe, and comment."}]}
 
     parsed_content = interesting_segment["content"]
     overlay_videos_with_blur(parsed_content, video_id)

@@ -14,32 +14,6 @@ Este programa tem como objetivo criar vídeos curtos e virais a partir de vídeo
 ## Parte Manual
 Atualmente, existe uma pequena parte manual no processo, pois ainda falta a implementação com a IA da OpenAI para tornar o processo totalmente automatizado.
 
-## Estrutura do Projeto
-
-viral-shorts-creator/
-│
-├── download_video.py # Script para baixar vídeos do YouTube
-├── cut_and_resize.py # Script para realizar cortes e ajustes de tamanho
-├── generate_prompts.py # Script para gerar prompts de partes virais
-├── separate_videos.py # Script para separar vídeos em partes curtas
-├── add_captions.py # Script para adicionar legendas aos vídeos curtos
-├── main.py # Script principal para orquestrar todo o processo
-│
-├── utils/
-│ ├── video_downloader.py # Módulo para baixar vídeos
-│ ├── video_editor.py # Módulo para edição de vídeos
-│ ├── prompt_generator.py # Módulo para geração de prompts virais
-│ ├── video_splitter.py # Módulo para separar vídeos em partes curtas
-│ └── caption_adder.py # Módulo para adicionar legendas
-│
-├── data/
-│ ├── raw_videos/ # Pasta para armazenar vídeos baixados
-│ ├── edited_videos/ # Pasta para armazenar vídeos editados
-│ └── short_videos/ # Pasta para armazenar vídeos curtos finais
-│
-├── README.md # Documentação do projeto
-└── requirements.txt # Dependências do projeto
-
 ## Uso
 Para utilizar este programa, siga os passos abaixo:
 
@@ -60,4 +34,17 @@ Para utilizar este programa, siga os passos abaixo:
 
 ### Pré-requisitos
 - Python 3.x
-- Bibliotecas listadas em `requirements.txt
+- os
+- time
+- math
+- json
+- torch
+- shutil
+- random
+- whisper
+- logging
+- threading
+- subprocess
+- pytube
+- youtube_transcript_api
+- moviepy.editor

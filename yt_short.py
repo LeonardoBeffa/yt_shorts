@@ -50,43 +50,35 @@ def remove_black_borders(video_path, output_path):
 def segment_video(response, video_id):
         output_files_normal = []
         output_files_full = []
-
         for i, segment in enumerate(response):
-            
             start_time = math.floor(float(segment.get("start_time", 0)))
             end_time = math.ceil(float(segment.get("end_time", 0))) + 1
-            real_time =  end_time - start_time
-
-            if real_time <= int(61):
-                input_file = fr"{input_path}\{video_id}_input_video.mp4"
-                output_file_normal = fr"{path}/{video_id}_output{str(i).zfill(3)}.mp4"
-                output_file_full = fr"{path}/{video_id}_full_output{str(i).zfill(3)}.mp4"
-                
-                command_normal = (
-                    fr'ffmpeg -i {input_file} -ss {start_time} -to {end_time} -vf '
-                    fr'scale=w=1080:h=-1:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2 '
-                    fr'-c:v h264_nvenc -preset fast -c:a copy {output_file_normal}'
-                )
-
-                subprocess.run(command_normal, shell=True, check=True)
-                logging.info(f'Segmento video {i} gerado: {output_file_normal}')
-
-                command_full = (
-                    fr'ffmpeg -i {input_file} -ss {start_time} -to {end_time} -vf '
-                    fr'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920 '
-                    fr'-c:v h264_nvenc -preset fast -c:a copy {output_file_full}'
-                )
-
-                subprocess.run(command_full, shell=True, check=True)
-                logging.info(f'Segmento video {i} gerado: {output_file_full}')
-
-                output_files_normal.append(output_file_normal)
-                output_files_full.append(output_file_full)
+            input_file = fr"{input_path}\{video_id}_input_video.mp4"
+            output_file_normal = fr"{path}/{video_id}_output{str(i).zfill(3)}.mp4"
+            output_file_full = fr"{path}/{video_id}_full_output{str(i).zfill(3)}.mp4"
             
-                return output_files_normal, output_files_full
-            else:
-                pass
+            command_normal = (
+                fr'ffmpeg -i {input_file} -ss {start_time} -to {end_time} -vf '
+                fr'scale=w=1080:h=-1:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2 '
+                fr'-c:v h264_nvenc -preset fast -c:a copy {output_file_normal}'
+            )
 
+            subprocess.run(command_normal, shell=True, check=True)
+            logging.info(f'Segmento video {i} gerado: {output_file_normal}')
+
+            command_full = (
+                fr'ffmpeg -i {input_file} -ss {start_time} -to {end_time} -vf '
+                fr'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920 '
+                fr'-c:v h264_nvenc -preset fast -c:a copy {output_file_full}'
+            )
+
+            subprocess.run(command_full, shell=True, check=True)
+            logging.info(f'Segmento video {i} gerado: {output_file_full}')
+
+            output_files_normal.append(output_file_normal)
+            output_files_full.append(output_file_full)
+        
+            return output_files_normal, output_files_full
 
 def overlay_videos_with_blur(response, video_id):
 

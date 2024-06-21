@@ -10,6 +10,7 @@ Este programa tem como objetivo criar vídeos curtos e virais a partir de vídeo
 3. **Geração de Prompts de Partes Virais**: Identifica e gera prompts das partes mais virais do vídeo.
 4. **Separação em Vídeos Curtos**: Divide o vídeo original em vários vídeos curtos prontos para publicação.
 5. **Ajustes Finais e Legendas**: Faz ajustes finais necessários, incluindo a adição de legendas aos vídeos curtos.
+6. **Deleta Todos Arquivos Temporarios**: Deleta Todos Arquivos Temporarios utilizados no processo de criação.
 
 ## Parte Manual
 Atualmente, existe uma pequena parte manual no processo, pois ainda falta a implementação com a IA da OpenAI para tornar o processo totalmente automatizado.

@@ -19,9 +19,7 @@ Este programa tem como objetivo criar vídeos curtos e virais a partir de vídeo
 6. **Deleta Todos Arquivos Temporarios**: Deleta Todos Arquivos Temporarios utilizados no processo de criação.
 
 ## Parte Manual
-Atualmente, existe uma pequena parte manual no processo, pois ainda falta a implementação com a IA da OpenAI para tornar o processo totalmente automatizado.
-- Necessario editar essa parte para cada Video.
-* ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/43fd674a-246b-419e-9a01-65cf4c01de86)
+Atualmente, existe uma pequena parte manual no processo, pois ainda falta a implementação com a IA da OpenAI para tornar o processo totalmente automatizado. Explicado em como usar.
 
 ## Uso
 Para utilizar este programa, siga os passos abaixo:
@@ -34,9 +32,11 @@ Para utilizar este programa, siga os passos abaixo:
 
 2. **Utilizar os prompts gerados para descobrir as partes virais do vídeo**
    - O programa irá gerar uma série de prompts que ajudarão a identificar as partes mais populares ou virais do vídeo.
-
+     
 3. **Adicionar ao programa**
    - Utilize as informações dos prompts gerados e adicione-as ao programa conforme as instruções fornecidas.
+   - Necessario editar essa parte para cada Video.
+   * ![image](https://github.com/LeonardoBeffa/yt_shorts/assets/171646489/43fd674a-246b-419e-9a01-65cf4c01de86)
 
 4. **Esperar o programa executar**
    - Inicie a execução do programa.
